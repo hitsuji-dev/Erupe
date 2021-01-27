@@ -11,7 +11,7 @@ import (
 
 func serverList(s *Server, w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w,
-		`<?xml version="1.0"?><server_groups><group idx='0' nam='Erupe' ip='%s' port="%d"/></server_groups>`,
+		`<?xml version="1.0"?><server_groups><group idx='0' name='Erupe' ip='%s' port="%d"/></server_groups>`,
 		s.erupeConfig.HostIP,
 		s.erupeConfig.Sign.Port,
 	)
@@ -52,7 +52,7 @@ func (s *Server) setupServerlistRoutes(r *mux.Router) {
 	jpServerList.Handle("/serverlist.xml", ServerHandlerFunc{s, serverList})
 }
 
-func (s *Server) setupOriginalLauncherRotues(r *mux.Router) {
+func (s *Server) setupOriginalLauncherRoutes(r *mux.Router) {
 	// TW
 	twMain := r.Host("mhfg.capcom.com.tw").Subrouter()
 	twMain.PathPrefix("/").Handler(http.FileServer(http.Dir("./www/tw/")))
