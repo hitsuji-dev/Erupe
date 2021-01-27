@@ -68,7 +68,7 @@ func (s *Server) setupOriginalLauncherRoutes(r *mux.Router) {
 
 }
 
-func (s *Server) setupCustomLauncherRotues(r *mux.Router) {
+func (s *Server) setupCustomLauncherRoutes(r *mux.Router) {
 	// TW
 	twMain := r.Host("mhfg.capcom.com.tw").Subrouter()
 	twMain.PathPrefix("/g6_launcher/").Handler(http.StripPrefix("/g6_launcher/", http.FileServer(http.Dir("./www/erupe/"))))

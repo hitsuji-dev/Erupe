@@ -58,7 +58,7 @@ func (s *Server) Start() error {
 	if s.useOriginalLauncherFiles {
 		s.setupOriginalLauncherRoutes(r)
 	} else {
-		s.setupCustomLauncherRotues(r)
+		s.setupCustomLauncherRoutes(r)
 	}
 
 	s.httpServer.Addr = fmt.Sprintf(":%d", s.erupeConfig.Launcher.Port)
