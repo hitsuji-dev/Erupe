@@ -1,9 +1,20 @@
 package signserver
 
-import "time"
+import (
+	"time"
+
+	"golang.org/x/crypto/bcrypt"
+)
 
 func (s *Server) registerDBAccount(username string, password string) error {
-	_, err := s.db.Exec("INSERT INTO users (username, password) VALUES ($1, $2)", username, password)
+	// Create salted hash of user password
+	hash, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
+	if err != nil {
+		return err
+	}
+	hashedPassword := string(hash)
+
+	_, err = s.db.Exec("INSERT INTO users (username, password) VALUES ($1, $2)", username, hashedPassword)
 	if err != nil {
 		return err
 	}

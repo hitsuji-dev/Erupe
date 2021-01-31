@@ -9,6 +9,7 @@ import (
 	"github.com/Andoryuuta/Erupe/network"
 	"github.com/Andoryuuta/byteframe"
 	"go.uber.org/zap"
+	"golang.org/x/crypto/bcrypt"
 )
 
 // Session holds state for the sign server connection.
@@ -91,6 +92,7 @@ func (s *Session) handleDSGNRequest(bf *byteframe.ByteFrame) error {
 	)
 	err := s.server.db.QueryRow("SELECT id, password FROM users WHERE username = $1", reqUsername).Scan(&id, &password)
 	var serverRespBytes []byte
+
 	switch {
 	case err == sql.ErrNoRows:
 		s.logger.Info("Account not found", zap.String("reqUsername", reqUsername))
@@ -120,13 +122,25 @@ func (s *Session) handleDSGNRequest(bf *byteframe.ByteFrame) error {
 		s.logger.Warn("Got error on SQL query", zap.Error(err))
 		break
 	default:
-		if reqPassword == password {
+		byteHash := []byte(password)
+
+		err = bcrypt.CompareHashAndPassword(byteHash, []byte(reqPassword))
+		if err != nil {
+			s.logger.Info("Passwords don't match!")
+			serverRespBytes = makeSignInFailureResp(SIGN_EPASS)
+		} else {
+			s.logger.Info("Passwords match!")
+			serverRespBytes = s.makeSignInResp(id)
+
+		}
+
+		/* if reqPassword == password {
 			s.logger.Info("Passwords match!")
 			serverRespBytes = s.makeSignInResp(id)
 		} else {
 			s.logger.Info("Passwords don't match!")
 			serverRespBytes = makeSignInFailureResp(SIGN_EPASS)
-		}
+		} */
 
 	}
 
