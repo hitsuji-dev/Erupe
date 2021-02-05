@@ -122,9 +122,9 @@ func (s *Session) handleDSGNRequest(bf *byteframe.ByteFrame) error {
 		s.logger.Warn("Got error on SQL query", zap.Error(err))
 		break
 	default:
-		byteHash := []byte(password)
+		passwordHash := []byte(password)
 
-		err = bcrypt.CompareHashAndPassword(byteHash, []byte(reqPassword))
+		err = bcrypt.CompareHashAndPassword(passwordHash, []byte(reqPassword))
 		if err != nil {
 			s.logger.Info("Passwords don't match!")
 			serverRespBytes = makeSignInFailureResp(SIGN_EPASS)
@@ -133,15 +133,6 @@ func (s *Session) handleDSGNRequest(bf *byteframe.ByteFrame) error {
 			serverRespBytes = s.makeSignInResp(id)
 
 		}
-
-		/* if reqPassword == password {
-			s.logger.Info("Passwords match!")
-			serverRespBytes = s.makeSignInResp(id)
-		} else {
-			s.logger.Info("Passwords don't match!")
-			serverRespBytes = makeSignInFailureResp(SIGN_EPASS)
-		} */
-
 	}
 
 	err = s.cryptConn.SendPacket(serverRespBytes)

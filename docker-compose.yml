@@ -1,0 +1,66 @@
+version: "3.9"
+
+# README
+# In order to use docker compose up to deploy this solution, you must edit the .env file variables to match those defined in your config.json
+# You should change the default POSTGRES_PASSWORD to be some unique password in the .env file and config.json 
+#
+#
+# Additionally you must change the key "host" in config.json to resemble:
+# Ex: "database": {
+#         "host": "db",
+#         "password": "YOURNEWPASSWORD",
+#     }
+#
+
+services:
+  db:
+    image: postgres:13.1-alpine
+    volumes:
+      - erupe-db-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=${POSTGRES_USERNAME}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=erupe
+    ports: 
+      - "5432:5432"
+    networks: 
+      - backend
+    
+
+
+  migrate:
+    image: migrate/migrate
+    volumes: 
+      - ./migrations:/migrations
+    command: -source=file://migrations -database postgres://${POSTGRES_USERNAME}:${POSTGRES_PASSWORD}@db:5432/erupe?sslmode=disable up
+    networks: 
+      - backend
+    depends_on: 
+      - db
+    
+
+
+  server_services:
+    build: .
+    volumes:
+      - erupe-server:/app/erupe
+    ports:
+      - "80:80"
+      - "53312:53312"
+      - "54001:54001"
+      - "53310:53310"
+    networks: 
+      - backend
+    depends_on: 
+      - db
+      - migrate
+
+
+networks:
+  backend:
+
+
+volumes:
+  erupe-db-data:
+  erupe-server:
+  

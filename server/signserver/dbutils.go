@@ -8,13 +8,12 @@ import (
 
 func (s *Server) registerDBAccount(username string, password string) error {
 	// Create salted hash of user password
-	hash, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
+	passwordHash, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
 	if err != nil {
 		return err
 	}
-	hashedPassword := string(hash)
 
-	_, err = s.db.Exec("INSERT INTO users (username, password) VALUES ($1, $2)", username, hashedPassword)
+	_, err = s.db.Exec("INSERT INTO users (username, password) VALUES ($1, $2)", username, string(passwordHash))
 	if err != nil {
 		return err
 	}

@@ -1,0 +1,7 @@
+.gitignore
+.dockerignore
+Dockerfile
+savedata/
+www/tw/
+www/jp/
+*.bat
