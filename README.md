@@ -147,7 +147,7 @@ You will want to forward ports for everything below the line. You could forward 
 
 ## Extra
 
-- Hyper-V support / WSL2 ports may conflict with the ones used by Erupe, to fix this, run the following:
+- Hyper-V support / WSL2 ports may conflict with the ones used by Erupe ([issue](https://github.com/ErupeServer/Erupe/issues/34)), to fix this, run the following:
     - Run: `dism.exe /Online /Disable-Feature:Microsoft-Hyper-V`.
     - Reboot your device.
     - Run:
