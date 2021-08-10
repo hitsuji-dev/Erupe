@@ -158,3 +158,7 @@ You will want to forward ports for everything below the line. You could forward 
         dism.exe /Online /Enable-Feature:Microsoft-Hyper-V
         ```
     - Reboot your device.
+
+## Credits
+- [Erupe Contributors](https://github.com/ErupeServer/Erupe)
+- [theBusBoy](https://github.com/theBusBoy)
