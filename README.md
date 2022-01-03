@@ -1,4 +1,5 @@
 [Last commit](https://github.com/ricochhet/Erupe/tree/f1bbc25b25fb08ad03b539b108a9e627b9c97a71)
+Please be respectful of peoples wishes. 
 
 # Erupe
 This project is in its infancy and has no reliable active developer, no documentation, and no support.
