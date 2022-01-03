@@ -1,4 +1,7 @@
+Feel free to contribute, make pull requests, open issues, etc. 
+
 [Last commit](https://github.com/ricochhet/Erupe/tree/f1bbc25b25fb08ad03b539b108a9e627b9c97a71)
+
 Please be respectful of peoples wishes. 
 
 # Erupe
