@@ -8,13 +8,11 @@ The Monster Hunter Frontier Client heavily relies on Internet Explorer to work p
 
 ## Step 2: Download Python & Install Frida
 
-Installing frida via pip does not work with the latest python 3.10 release. You need to work around it a bit to install frida it only works on python 3.8 as far as I can see.
+Using the launcher patcher with python 3.10 does not work as it seems. It is eiter that the script has to be modified to work with python 3.10 or frida has a problem with 3.10. For this guide we will use python 3.8, which works fine for our purposes:
 
 - Download python 3.8.10 for windows here: [Download the la test release of Python 3.8](https://www.python.org/downloads/release/python-3810/)
-- Go to fridas pypi-page: https://pypi.org/project/frida/
-- Go to "Download Files"
-- Download either "frida-15.1.14-py3.8-win-amd64.egg" or "frida-15.1.14-py3.8-win32.egg" depending if your system is 64-bit or 32-bit.
-- Save it to: C:\Users\USERNAME
+- Install and **MAKE SURE YOU SELECT THE OPTION TO ADD PYTHON TO PATH.**
+- Open a new command prompt (not a python shell).
 - Enter the command: `pip install frida`.
 
 ## Step 3: Download / Copy the Client Patcher
