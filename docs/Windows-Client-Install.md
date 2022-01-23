@@ -19,7 +19,7 @@ Using the launcher patcher with python 3.10 does not work as it seems. It is eit
 
 There are two version of the client-patcher, which can be used:
 
-- The Normal version of the Client-Patcher, which you can either copy or download [from here](./archive/no_gg_jp.py)
+- The Normal version of the Client-Patcher, which you can either copy or download [from here](../archive/no_gg_jp.py)
 - A verion of the Client-Patcher script that supports the "High Grade Assets"-Option found in Monster Hunter Frontier. To use High Grade Assets download or copy [this script](../archive/no_gg_jp.py)
 
 - After you downloaded the right script put it within your `MFH-ZZ_Installed_Files` folder (or whatever you named the folder containing mhf.exe). The patch has to be in the same directory as the EXE of the game.
