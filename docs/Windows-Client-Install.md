@@ -20,7 +20,7 @@ Using the launcher patcher with python 3.10 does not work as it seems. It is eit
 There are two version of the client-patcher, which can be used:
 
 - The Normal version of the Client-Patcher, which you can either copy or download [from here](./archive/no_gg_jp.py)
-- A verion of the Client-Patcher script that supports the "High Grade Assets"-Option found in Monster Hunter Frontier. To use High Grade Assets download or copy [this script](./archive/no_gg_jp.py)
+- A verion of the Client-Patcher script that supports the "High Grade Assets"-Option found in Monster Hunter Frontier. To use High Grade Assets download or copy [this script](../archive/no_gg_jp.py)
 
 - After you downloaded the right script put it within your `MFH-ZZ_Installed_Files` folder (or whatever you named the folder containing mhf.exe). The patch has to be in the same directory as the EXE of the game.
 - **NOTE:** This has to be done for two reasons, there are protections on the mhf.exe itself called AsProtect and an ~~Anti-Cheat~~ Malware program called GameGuard. Both prevent us from being unable to connect to private servers, and this python script bypasses both to allow us to successfully launch the game.
