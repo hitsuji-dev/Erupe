@@ -95,11 +95,18 @@ def main():
             var classNameStr = lpszClassName.readCString();
             var match = classNameStr == " M H F ";
             if(match) {
-                console.log("mhfo.dll unpacked.");
-                var mhfoMod = Process.getModuleByName('mhfo.dll');
+                console.log("mhfo(-hd).dll unpacked.");
+                try {
+                  console.log("try to find standard dll")
+                  var mhfoMod = Process.getModuleByName('mhfo.dll');
+                }
+                catch(err) {
+                  console.log("try to find hd dll")
+                  var mhfoMod = Process.getModuleByName('mhfo-hd.dll');
+                }
                 var ggCheckFuncResults = Memory.scanSync(mhfoMod.base, mhfoMod.size, "A1 ?? ?? ?? ?? 48 A3 ?? ?? ?? ?? 85 C0 7F 32");
                 if(ggCheckFuncResults.length >= 1) {
-                    console.log("Found GG check function in mhfo.dll. Patching...");
+                    console.log("Found GG check function in mhfo(-hd).dll Patching...");
 
                     var ggCheckFunc = ggCheckFuncResults[0].address;
                     Memory.patchCode(ggCheckFunc, 64, function (code) {
