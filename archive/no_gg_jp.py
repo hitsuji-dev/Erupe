@@ -96,13 +96,14 @@ def main():
             var match = classNameStr == " M H F ";
             if(match) {
                 console.log("mhfo(-hd).dll unpacked.");
+                var mhfoMod
                 try {
                   console.log("try to find standard dll")
-                  var mhfoMod = Process.getModuleByName('mhfo.dll');
+                  mhfoMod = Process.getModuleByName('mhfo.dll');
                 }
                 catch(err) {
                   console.log("try to find hd dll")
-                  var mhfoMod = Process.getModuleByName('mhfo-hd.dll');
+                  mhfoMod = Process.getModuleByName('mhfo-hd.dll');
                 }
                 var ggCheckFuncResults = Memory.scanSync(mhfoMod.base, mhfoMod.size, "A1 ?? ?? ?? ?? 48 A3 ?? ?? ?? ?? 85 C0 7F 32");
                 if(ggCheckFuncResults.length >= 1) {
