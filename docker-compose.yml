@@ -21,46 +21,56 @@ services:
       - POSTGRES_USER=${POSTGRES_USERNAME}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_DB=erupe
-    ports: 
+    ports:
       - "5432:5432"
-    networks: 
+    networks:
       - backend
-    
-
 
   migrate:
     image: migrate/migrate
-    volumes: 
+    volumes:
       - ./migrations:/migrations
     command: -source=file://migrations -database postgres://${POSTGRES_USERNAME}:${POSTGRES_PASSWORD}@db:5432/erupe?sslmode=disable up
-    networks: 
+    networks:
       - backend
-    depends_on: 
+    depends_on:
       - db
-    
-
 
   server_services:
     build: .
     volumes:
-      - erupe-server:/app/erupe
+      - ./config.json:/app/erupe/config.json
     ports:
       - "80:80"
       - "53312:53312"
       - "54001:54001"
       - "53310:53310"
-    networks: 
+    networks:
       - backend
-    depends_on: 
+    depends_on:
       - db
       - migrate
 
+  adm:
+    image: dpage/pgadmin4
+    volumes:
+      - ./pgadmin:/var/lib/pgadmin
+    # - ./pgadmin:/var/lib/pgadmin/storage 
+    ports:
+      - "30080:80"
+      - "30443:443"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: root@example.jp
+      PGADMIN_DEFAULT_USER: ${POSTGRES_USERNAME}
+      PGADMIN_DEFAULT_PASSWORD: ${POSTGRES_PASSWORD}
+    networks:
+      - backend
+    depends_on:
+      - db
+      - migrate
 
 networks:
   backend:
 
-
 volumes:
   erupe-db-data:
-  erupe-server:
-  

@@ -1,22 +1,19 @@
 {
     "host_ip": "127.0.0.1",
     "bin_path": "bin",
-
     "devmode": true,
     "devmodeoptions": {
         "cleandb": false,
         "maxlauncherhr": true,
         "fixedstageid": true
     },
-
     "discord": {
         "enabled": false,
         "bottoken": "<BOT TOKEN>",
         "channelid": "<CHANNEL ID>"
     },
-
     "database": {
-        "host": "localhost",
+        "host": "db",
         "port": 5432,
         "user": "postgres",
         "password": "password",
